@@ -1,0 +1,16 @@
+public List<String> letterCombinations(String digits){
+		LinkedList<String> res = new LinkedList<String>();
+		String[] maps = new String[]{"0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+		if(digits.length()==0) return res;
+		res.add("");
+		for(int i = 0; i<digits.length();i++){
+			int current = digits.charAt(i) - '0';
+			while(res.peek().length()==i){
+				String p = res.remove();
+				for(char c : maps[current].toCharArray()){
+					res.add(p+c);
+				}
+			}
+		}
+		return res;
+	}

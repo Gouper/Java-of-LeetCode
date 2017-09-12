@@ -1,0 +1,15 @@
+public List<String> generateParenthesis(int n){
+		List<String> result = new ArrayList<String>();
+		helper("", n, n, result);		
+		return result;
+		
+	}
+	void helper(String ss,int leftnum, int rightnum, List<String> result){
+		if(leftnum<0||rightnum<0||leftnum>rightnum) return;
+		if(leftnum==0&&rightnum==0){
+			result.add(ss);
+			return;
+		}
+		helper(ss+"(", leftnum-1, rightnum, result);
+		helper(ss+")", leftnum, rightnum-1, result);
+	}

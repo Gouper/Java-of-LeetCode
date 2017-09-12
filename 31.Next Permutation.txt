@@ -1,0 +1,31 @@
+public void nextPermutation(int[] nums){
+		int n = nums.length-1;
+		int i=n,j;
+		while(i>0&&nums[i]<=nums[i-1]){
+				i--;
+		}
+		if(i==0){
+			reverse(nums, 0);
+			return;
+		}
+		j=i;
+		while(j<=n&&nums[j]>nums[i-1]){
+			j++;
+		}
+		swap(nums, i-1, j-1);
+		reverse(nums, i);
+	}
+	private void reverse(int[] nums, int start){
+		int n = nums.length-1;
+		while(start<n){
+			swap(nums, start, n);
+			start++;
+			n--;
+		}
+	}
+	private void swap(int[] nums,int i, int j){
+		int temp;
+		temp = nums[i];
+		nums[i] = nums[j];
+		nums[j] = temp;
+	}

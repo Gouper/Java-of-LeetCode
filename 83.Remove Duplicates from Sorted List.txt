@@ -1,0 +1,10 @@
+	public ListNode deleteDuplicates(ListNode head){
+		if(head==null)return head;
+		ListNode dd;
+		dd = head;
+		while(dd.next!=null){
+			if(dd.val == dd.next.val) dd.next = dd.next.next;
+			else dd = dd.next;
+		}
+		return head;
+	}

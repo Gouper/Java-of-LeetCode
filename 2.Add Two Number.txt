@@ -1,0 +1,19 @@
+public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode c1 = l1;
+		ListNode c2 = l2;
+		ListNode dd = new ListNode(0);
+		ListNode res = dd;
+		int index = 0;
+		while(c1!=null||c2!=null||index!=0) {
+			ListNode cur = new ListNode(0);
+			int sum  = (c1==null?0:c1.val)+(c2==null?0:c2.val)+index;
+			cur.val = sum%10;
+			index = sum/10;
+			res.next = cur;
+			res = cur;
+			
+			c1 = c1==null?c1:c1.next;
+			c2 = c2==null?c2:c2.next;			
+		}
+		return dd.next;
+    }

@@ -1,0 +1,31 @@
+public String addBinary(String a,String b){
+		StringBuilder ss = new StringBuilder();
+		int m = a.length();
+		int n = b.length();
+		int index = 0;
+		int sum;
+		while(m>0||n>0){
+			if(m>0&&n>0){
+				sum = (a.charAt(m-1)-'0')+(b.charAt(n-1)-'0')+index;
+				index = sum/2;
+				sum = sum%2;
+				m--;
+				n--;
+			}
+			else if(m>0){
+				sum = (a.charAt(m-1)-'0')+index;
+				index = sum/2;
+				sum = sum%2;
+				m--;
+			}
+			else{
+				sum = (b.charAt(n-1)-'0')+index;
+				index = sum/2;
+				sum = sum%2;
+				n--;
+			}
+			ss.append(sum);
+		}
+		if(index!=0)ss.append(index);
+		return ss.reverse().toString();
+	}

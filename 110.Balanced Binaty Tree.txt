@@ -1,0 +1,23 @@
+public boolean isBalanced(TreeNode root){
+		if(root==null) return true;
+		if(Math.abs(depth(root.left)-depth(root.right))<2) return isBalanced(root.left)&&isBalanced(root.right);
+		return false;
+		
+	}
+	public int depth(TreeNode root){
+		if(root == null)return 0;
+		return Math.max(depth(root.left)+1,depth(root.right)+1);
+	}
+public boolean isBalanced2(TreeNode root){
+		return dfsheight(root)!=-1;
+	}
+	public int dfsheight(TreeNode root){
+		if(root == null) return 0;
+		int leftheight = dfsheight(root.left);
+		if(leftheight==-1)return -1;
+		int rightheight = dfsheight(root.right);
+		if(rightheight==-1)return -1;
+		if(Math.abs(leftheight-rightheight)<=1)
+			return Math.max(leftheight,rightheight)+1;
+		return -1;
+	}

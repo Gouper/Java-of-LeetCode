@@ -1,0 +1,19 @@
+	public boolean isPalindrome1(int x){
+		int a = x;
+		int rev = 0;
+		while(a!=0){
+			rev = rev*10 + a%10;
+			a = a/10;
+		}
+		if(rev == x) return true;
+		return false;
+	}
+	public boolean isPalindrome(int x){
+		if(x<0||(x!=0&&x%10==0)) return false;
+		int rev = 0;
+		while(x>rev){
+			rev = rev*10 + x%10;
+			x = x/10;
+		}
+		return (rev/10==x||rev==x);
+	}
