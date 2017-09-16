@@ -1,0 +1,19 @@
+public String multiply(String num1, String num2){
+			int n1 = num1.length();
+			int n2 = num2.length();
+			int[] pos = new int[n1+n2];
+			int i,j;
+			for(j=n2-1;j>=0;j--){
+				for(i=n1-1;i>=0;i--){
+					int index = (num1.charAt(i)-'0')*(num2.charAt(j)-'0');
+					pos[i+j+1] = index%10+pos[i+j+1];
+					pos[i+j] = index/10 + pos[i+j+1]/10+pos[i+j];
+					pos[i+j+1] %= 10; 
+				}
+			}
+			StringBuilder sBuilder  = new StringBuilder();
+			for(int p:pos){
+				if(p!=0||sBuilder.length()!=0) sBuilder.append(p);
+			}
+			return sBuilder.length() == 0?"0":sBuilder.toString();
+	}
