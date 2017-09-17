@@ -1,0 +1,26 @@
+public List<List<Integer>> permuteUnique(int[] nums) {
+	    List<List<Integer>> list = new ArrayList<>();
+	    Arrays.sort(nums);
+	    boolean[] indicates = new boolean[nums.length];
+	    backTrack2(list, new ArrayList<Integer>(), nums, indicates);
+	    return list;
+	}
+
+
+private void backTrack2(List<List<Integer>> list,List<Integer>cur, int[] nums ,boolean[] indicates){
+		if(cur.size() == nums.length){
+			list.add(new ArrayList<Integer>(cur));
+		}
+		else{
+			for(int i = 0;i < nums.length; i++){
+				if(indicates[i]==true) continue;
+				if(i>0&&!indicates[i-1]&&nums[i-1] == nums[i])continue;
+				cur.add(nums[i]);
+				indicates[i]=true;
+				backTrack2(list, cur, nums,indicates);
+				indicates[i] = false;
+				cur.remove(cur.size()-1);
+				
+			}
+		}
+	}
