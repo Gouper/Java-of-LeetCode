@@ -1,0 +1,58 @@
+#超时的算法
+public List<List<String>> groupAnagrams(String[] strs) {
+		List<List<String>> result = new ArrayList<>();
+		List<String> cur = new ArrayList<String>();
+		int n = strs.length;
+		boolean[] index = new boolean[n];
+		for(int i = 0;i<n;i++){
+			if(index[i]) continue;
+			cur.add(strs[i]);
+			for(int j = i+1;j<n;j++){
+				if(!index[i]&&compare(strs[i], strs[j])&&!index[j]){
+					cur.add(strs[j]);
+					index[j]=true;
+				}
+			}
+			result.add(new ArrayList<>(cur));
+			cur.clear();
+		}
+		
+		
+		return result;
+	}
+	public boolean compare(String a, String b) {
+		if(a.length()!=b.length()) return false;
+		int n = a.length();
+		boolean[] index = new boolean[n];
+
+		for(int i = 0;i<n;i++){
+			int cur = 0;
+			for(int j = 0;j<n;j++){
+				if(a.charAt(i)==b.charAt(j)&&!index[j]){
+					index[j]=true;
+					cur = 1;
+					break;
+				}
+			}
+			if(cur == 0){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+#AC的算法
+
+
+public List<List<String>> groupAnagrams(String[] strs){
+		if(strs.length==0)return new ArrayList<>();
+		Map<String, List<String>> map = new HashMap<String, List<String>>();
+		for(String ss:strs){
+			char[] ca = ss.toCharArray();
+			Arrays.sort(ca);
+			String key = String.valueOf(ca);
+			if(!map.containsKey(key))map.put(key, new ArrayList<>());
+			map.get(key).add(ss);
+		}
+		return new ArrayList<>(map.values());
+	}
