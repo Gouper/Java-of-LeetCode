@@ -1,0 +1,54 @@
+public List<Interval> merge(List<Interval> intervals){
+		int index =1;
+		int n = intervals.size();
+		intervals.sort((i1, i2) -> Integer.compare(i1.start, i2.start));
+		
+		if(n<=1)return intervals;
+		while(index<n){
+			Interval aa = intervals.get(index-1);
+			Interval bb = intervals.get(index);
+			
+			if(aa.end>=bb.start){
+				if(aa.end<bb.end){
+					aa.end=bb.end;
+					intervals.remove(index);
+					n--;
+				}
+				else {
+					intervals.remove(index);
+					n--;
+				}
+			}
+			else index++;
+		}
+		return intervals;
+	}
+	//这个方法比较快
+	public List<Interval> merge2(List<Interval> intervals) {
+        List<Interval> res = new LinkedList<Interval>();
+      if (intervals == null || intervals.size() == 0) {
+          return res;
+      }
+
+       Collections.sort(intervals, new Comparator<Interval>() {
+           @Override
+           public int compare(Interval o1, Interval o2) {
+               return o1.start - o2.start;
+           }
+       });
+      
+      int start = intervals.get(0).start;
+      int end = intervals.get(0).end;
+      for (Interval interval : intervals) {
+          if (interval.start <= end) {
+              end = Math.max(end, interval.end);
+          } else {
+              res.add(new Interval(start, end));
+              start = interval.start;
+              end = interval.end;
+          }
+      }
+      res.add(new Interval(start, end));
+      
+      return res;
+  }
