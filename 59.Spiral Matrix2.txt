@@ -1,0 +1,28 @@
+public int[][] generateMatrix(int n){
+	    int[][] matrix = new int[n][n];
+	    int index = 1;
+	    int left = 0, right = n-1, up = 0, down = n-1;
+	    while(left<=right&&up<=down){
+	        for(int i = left;i<=right;i++){
+	            matrix[up][i] = index;
+	            index++;
+            }
+            for(int i = up+1;i<=down;i++){
+	            matrix[i][right] = index;
+	            index++;
+            }
+            for(int i = right-1;i>=left;i--){
+                matrix[down][i]=index;
+                index++;
+            }
+            for(int i = down-1;i>up;i--){
+                matrix[i][left] = index;
+                index++;
+            }
+            left++;
+            right--;
+            up++;
+            down--;
+        }
+	    return matrix;
+    }
