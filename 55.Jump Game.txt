@@ -1,0 +1,20 @@
+public boolean canJump(int[] nums){
+        int n = nums.length;
+        int[] res = new int[n];
+        if(n==1) return nums[0]>0;
+        res[0] = nums[0];
+        for(int i = 1;i<n;i++){
+            if(res[i-1]==0) break;
+            res[i] = Math.max(res[i-1]-1, nums[i]);
+        }
+        return res[n-2]>=1;
+    }
+    public boolean canJump2(int[] nums){
+        int lastPos = nums.length-1;
+        for(int i = nums.length-1;i>=0;i--){
+            if(i+nums[i]>=lastPos){
+                lastPos = i;
+            }
+        }
+        return lastPos==0;
+    }
