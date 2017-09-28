@@ -1,0 +1,31 @@
+public void setZeroes(int[][] matrix){
+	    int rowindex=0,colindex=0;
+        int row = matrix.length;
+        int col = matrix[0].length;
+	    for(int i = 0;i<row;i++)
+	        for(int j = 0;j<col;j++){
+	            if(matrix[i][j]==0){
+	                if(i==0) rowindex = 1;
+	                if(j==0) colindex = 1;
+	                matrix[i][0] = 0;
+	                matrix[0][j] = 0;
+                }
+            }
+        for(int i = 1;i<row;i++){
+            for(int j =1;j<col;j++){
+                if(matrix[i][0]==0||matrix[0][j]==0){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        if(rowindex==1){
+            for(int i =0;i<col;i++){
+                matrix[0][i] = 0;
+            }
+        }
+        if(colindex==1){
+            for(int i =0;i<row;i++){
+                matrix[i][0] = 0;
+            }
+        }
+    }
