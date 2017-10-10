@@ -1,0 +1,14 @@
+public List<List<Integer>> subsets(int[] nums){
+        Arrays.sort(nums);
+        List<List<Integer>> sub = new ArrayList<List<Integer>>();
+        help(sub,new ArrayList<Integer>(),nums,0);
+        return sub;
+    }
+    private void help(List<List<Integer>> sub,List<Integer> index,int[] nums,int k){
+        sub.add(new ArrayList<>(index));
+        for(int i = k;i<nums.length;i++){
+            index.add(nums[i]);
+            help(sub,index,nums,i+1);
+            index.remove(index.size()-1);
+        }
+    }
