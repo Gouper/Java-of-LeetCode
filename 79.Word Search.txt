@@ -1,0 +1,20 @@
+public boolean exist(char[][] board, String word){
+        char[] w = word.toCharArray();
+        for(int x = 0; x < board.length;x++){
+            for(int y = 0; y<board[0].length;y++){
+                if(existhelp(board,w,x,y,0)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private boolean existhelp(char[][] board,char[] w,int x, int y,int i){
+        if(i==w.length) return true;
+        if(x<0||y<0||x==board.length||y==board[0].length) return false;
+        if(w[i]!=board[x][y])return false;
+        board[x][y] ^= 256;
+        boolean index = existhelp(board,w,x+1,y,i+1)||existhelp(board,w,x-1,y,i+1)||existhelp(board,w,x,y+1,i+1)||existhelp(board,w,x,y-1,i+1);
+        board[x][y] ^= 256;
+        return index;
+    }
