@@ -1,0 +1,20 @@
+ public ListNode deleteDuplicates(ListNode head){
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy,index;
+        index = head;
+        while(index!=null){
+            while(index.next!=null&&index.val==index.next.val){
+                index = index.next;
+            }
+            if(index == pre.next){
+                pre = index;
+                index = index.next;
+            }
+            else{
+                pre.next = index.next;
+                index = index.next;
+            }
+        }
+        return dummy.next;
+    }
