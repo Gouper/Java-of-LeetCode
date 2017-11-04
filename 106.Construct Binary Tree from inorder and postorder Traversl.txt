@@ -1,0 +1,22 @@
+public TreeNode buildTree2(int[] inorder, int[] postorder){
+       TreeNode res;
+       int len = inorder.length;
+       res = helpBT(inorder,0,len-1,postorder,0,len-1);
+       return res;
+   }
+   private TreeNode helpBT(int[] in,int instart,int inend,int[] post,int poststart,int postend){
+        if(instart>inend||poststart>postend) return null;
+        int rootval = post[postend];
+        int rootindex = 0;
+        for(int i=instart;i<=inend;i++){
+            if(rootval == in[i]){
+                rootindex = i;
+                break;
+            }
+        }
+        TreeNode root = new TreeNode(rootval);
+        int len = rootindex - instart;
+        root.right = helpBT(in,rootindex+1,inend,post,poststart+len,postend-1);
+        root.left = helpBT(in,instart,rootindex-1,post,poststart,poststart+len-1);
+        return root;
+   }
