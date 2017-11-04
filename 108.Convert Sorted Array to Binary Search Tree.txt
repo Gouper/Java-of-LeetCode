@@ -1,0 +1,15 @@
+public TreeNode sortedArrayToBST(int[] nums){
+         TreeNode res;
+         res = helpBST(nums,0,nums.length-1);
+         return res;
+    }
+    private TreeNode helpBST(int[] nums, int start, int end){
+        if(start>end)return null;
+        int rootval,mid;
+        mid = (start + end)/2;
+        rootval = nums[mid];
+        TreeNode root = new TreeNode(rootval);
+        root.left=helpBST(nums,start,mid-1);
+        root.right = helpBST(nums,mid+1,end);
+        return root;
+    }
