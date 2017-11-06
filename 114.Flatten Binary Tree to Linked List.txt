@@ -1,0 +1,33 @@
+public void flatten(TreeNode root){
+        if(root == null ) return;
+        List<Integer> cur = new ArrayList<>();
+        helpPre(root,cur);
+        newTree(root,cur,1);
+    }
+    private void helpPre(TreeNode root , List<Integer> cur){
+        if(root==null)return;
+        cur.add(root.val);
+        helpPre(root.left,cur);
+        helpPre(root.right,cur);
+    }
+    private void newTree(TreeNode root,List<Integer> cur,int index){
+        if(index == cur.size()) return;
+        root.left = null;
+        root.right = new TreeNode(cur.get(index));
+        newTree(root.right,cur,index+1);
+    }
+	
+public void flatten2(TreeNode root){
+        while(root!=null){
+            if(root.left!=null){
+                TreeNode pre = root.left;
+                while(pre.right!=null){
+                    pre = pre.right;
+                }
+                pre.right = root.right;
+                root.right = root.left;
+                root.left = null;
+            }
+            root = root.right;
+        }
+    }	
