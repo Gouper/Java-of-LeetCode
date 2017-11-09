@@ -1,0 +1,21 @@
+public int minimumTotal(List<List<Integer>> triangle){
+        int n = triangle.get(triangle.size()-1).size();
+        int[] res = new int[n];
+        res[0] = triangle.get(0).get(0);
+        int index = 2;
+        while(index<=n){
+            List<Integer> cur = triangle.get(index-1);
+            res[index-1] = res[index-2] + cur.get(index-1);
+            for(int i = index-2;i>0;i--){
+                res[i] = Math.min(cur.get(i)+res[i-1],cur.get(i)+res[i]);
+            }
+            res[0] = res[0] + cur.get(0);
+            index++;
+        }
+        int min = res[0];
+        for(int i = 0; i< n;i++){
+            if(min>res[i])
+                min = res[i];
+        }
+        return min;
+    }
