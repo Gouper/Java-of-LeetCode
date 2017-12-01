@@ -1,0 +1,34 @@
+public List<List<String>> partition(String s){
+        List<String> cur = new ArrayList<>();
+        List<List<String>> res = new ArrayList<>();
+        if(s==null||s.length()==0)
+            return res;
+        dfs(0,s,cur,res);
+        return res;
+    }
+    private void dfs(int start,String s, List<String> cur, List<List<String>> res){
+        if(start == s.length()){
+            res.add(new ArrayList<>(cur));
+            return;
+        }
+        for(int i = start;i<s.length();i++){
+            String ss = s.substring(start, i+1);
+            if(isPalindrome(ss)){
+                cur.add(ss);
+                dfs(i+1,s,cur,res);
+                cur.remove(cur.size()-1);
+            }
+        }
+    }
+    private boolean isPalindrome(String s){
+        int len = s.length()-1;
+        char[] ss = s.toCharArray();
+        int i = 0;
+        while(i<(len-i)){
+            if(ss[i]!=ss[len-i])
+                return false;
+            else
+                i++;
+        }
+        return true;
+    }
