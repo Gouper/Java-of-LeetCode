@@ -1,0 +1,34 @@
+class RandomListNode {
+    int label;
+    RandomListNode next,random;
+    RandomListNode(int x){this.label = x;}
+}
+
+
+public class TwoSum {
+    public RandomListNode copyRandomList(RandomListNode head){
+        if(head==null) return null;
+        RandomListNode node = head;
+        while(node!=null){
+            RandomListNode cur = new RandomListNode(node.label);
+            cur.next = node.next;
+            node.next = cur;
+            node = cur.next;
+        }
+        node = head;
+        while(node!=null){
+            if(node.random!=null){
+                node.next.random = node.random.next;
+            }
+            node = node.next.next;
+        }
+        RandomListNode newhead = head.next;
+        node = head;
+        while(node!=null){
+            RandomListNode newnode = node.next;
+            node.next = newnode.next;
+            if(newnode.next!=null) newnode.next = newnode.next.next;
+            node = node.next;
+        }
+        return newhead;
+    }
