@@ -1,0 +1,17 @@
+public List<Integer> postorderTraversal(TreeNode root){
+        LinkedList<Integer> res = new LinkedList<>();
+        Stack<TreeNode> sta = new Stack<>();
+        TreeNode p = root;
+        while(!sta.empty()||p!=null){
+            if(p!=null){
+                sta.push(p);
+                res.addFirst(p.val);
+                p = p.right;
+            }
+            else{
+                TreeNode node = sta.pop();
+                p = node.left;
+            }
+        }
+        return res;
+    }
