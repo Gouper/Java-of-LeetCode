@@ -1,0 +1,22 @@
+public ListNode insertionSortList(ListNode head){
+        if(head==null) return null;
+        ListNode dummy = new ListNode(1);
+        dummy.next = head;
+        ListNode max = head;
+        while(max.next!=null){
+            ListNode cur = max.next;
+            if(cur.val<max.val){
+                max.next = cur.next;
+                ListNode insert = dummy;
+                while(cur.val>insert.next.val){
+                    insert = insert.next;
+                }
+                cur.next = insert.next;
+                insert.next = cur;
+            }
+            else{
+                max = cur;
+            }
+        }
+        return dummy.next;
+    }

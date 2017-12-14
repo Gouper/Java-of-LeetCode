@@ -1,0 +1,32 @@
+public String reverseWords(String s){
+        int len = s.length();
+        StringBuilder res = new StringBuilder();
+        if(len==0) return s;
+        char[] sc = s.toCharArray();
+        int start = 0, index = len-1;
+        while(sc[index]==' '&&index>0){
+            index--;
+        }
+        if(sc[index]==' ') return "";
+        while(sc[start]==' '){
+            start++;
+        }
+
+        for(int i=index;i>=start;i--){
+            if(sc[i]==' '){
+                for(int j = i+1;j<=index;j++){
+                    res.append(sc[j]);
+                }
+                res.append(' ');
+                while(sc[i]==' '){
+                    i--;
+                }
+                index = i;
+            }
+        }
+        for(int j = start;j<=index;j++){
+            res.append(sc[j]);
+        }
+
+        return res.toString();
+    }
