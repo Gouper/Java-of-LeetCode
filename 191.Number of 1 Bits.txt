@@ -1,0 +1,8 @@
+public int hammingWeight(int n){
+        int index = 0;
+        while(n!=0){
+            index++;
+            n = n&(n-1);
+        }
+        return index;
+    }
