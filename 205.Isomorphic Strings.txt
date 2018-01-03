@@ -1,0 +1,21 @@
+public boolean isIsomorphic(String s, String t){
+        if(s.length()<2)return true;
+        return help(s).equals(help(t));
+    }
+    private String help(String s){
+        HashMap<Character,Integer> mapp = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        char[] cur = s.toCharArray();
+        int index = 0;
+        for(int i=0;i<s.length();i++){
+            if(!mapp.containsKey(cur[i])){
+                index++;
+                mapp.put(cur[i],index);
+                sb.append(index);
+            }
+            else {
+                sb.append(mapp.get(cur[i]));
+            }
+        }
+        return sb.toString();
+    }
