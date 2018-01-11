@@ -1,0 +1,39 @@
+ public boolean canFinish(int numCourses, int[][] prerequisites){
+        HashMap<Integer,List<Integer>> maps = new HashMap<>();
+        int[] indegree = new int[numCourses];
+        int len = prerequisites.length;
+        if(len<=0) return true;
+        for(int i = 0;i < len;i++){
+            int first = prerequisites[i][0];
+            int second = prerequisites[i][1];
+            if(!maps.containsKey(first)){
+                maps.put(first,new LinkedList<>());
+            }
+            maps.get(first).add(second);
+            indegree[second]++;
+        }
+        Queue<Integer> queue = new ArrayDeque<>();
+        for(int i=0;i<numCourses;i++){
+            if(indegree[i]==0)
+                queue.add(i);
+        }
+        while(queue.size()>0){
+            int val = queue.poll();
+            indegree[val] = -1;
+            if(!maps.containsKey(val)) {
+                continue;
+            }
+            List<Integer> temp = maps.get(val);
+            for(int i=0;i<temp.size();i++){
+                int index = temp.get(i);
+                indegree[index]--;
+                if(indegree[index]==0)
+                    queue.add(index);
+            }
+        }
+        for(int i=0;i<numCourses;i++){
+            if(indegree[i]!=-1)
+                return false;
+        }
+        return true;
+    }
