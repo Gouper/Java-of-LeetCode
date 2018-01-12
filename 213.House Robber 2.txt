@@ -1,0 +1,24 @@
+public int rob(int[] nums) {
+         int previousrob = 0;
+        int previousnotrob = 0;
+        int notfirst,notend;
+        if(nums.length==1)return nums[0];
+        for(int i=0;i<nums.length-1;i++){
+            int currob = previousnotrob + nums[i];
+            int curnotrob = Math.max(previousnotrob,previousrob);
+            
+            previousrob = currob;
+            previousnotrob = curnotrob;
+        }
+        notfirst = Math.max(previousnotrob,previousrob);
+        previousnotrob = previousrob = 0;
+        for(int i=1;i<nums.length;i++){
+            int currob = previousnotrob + nums[i];
+            int curnotrob = Math.max(previousnotrob,previousrob);
+
+            previousrob = currob;
+            previousnotrob = curnotrob;
+        }
+        notend = Math.max(previousnotrob,previousrob);
+        return Math.max(notfirst,notend);
+    }
